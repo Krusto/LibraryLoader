@@ -15,11 +15,11 @@ project(LIBRARYLOADER VERSION 0.1.0 LANGUAGES CXX)
 
 add_library(mylib SHARED ./example/mylib/private/box_impl.cpp)
 add_library(mylib_wrapper STATIC ./example/mylib/mylib.cpp ./example/mylib/Box.cpp)
-target_include_directories(mylib_wrapper PRIVATE ./src)
+target_include_directories(mylib_wrapper PRIVATE ./include)
 
 add_executable(Example ./example/example.cpp)
 target_link_libraries(Example PRIVATE mylib_wrapper)
-target_include_directories(Example PRIVATE ./src)
+target_include_directories(Example PRIVATE ./include)
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(Example PRIVATE -static-libstdc++)
     target_compile_options(Example PRIVATE -Wall)
