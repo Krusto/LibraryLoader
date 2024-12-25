@@ -10,7 +10,10 @@
 #include <stdio.h>
 #define LOG_ERROR printf
 #endif
-
+#ifndef LOG_DEBUG
+#include <stdio.h>
+#define LOG_DEBUG printf
+#endif
 #ifdef __cplusplus
 #include <string_view>
 #include <expected>
@@ -31,6 +34,9 @@ public:
 private:
 #if _WIN32
     HINSTANCE m_hModule = nullptr;
+#else
+    // TODO:
+    // Add Linux support
 #endif
 };
 

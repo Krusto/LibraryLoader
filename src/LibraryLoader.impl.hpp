@@ -4,7 +4,8 @@
 
 int LibraryLoader::Init(std::string_view path)
 {
-    LOG("LibraryLoader::Init %s\n", path.data());
+    LOG_DEBUG("LibraryLoader::Init %s\n", path.data());
+    // TODO: Add Linux support
     m_hModule = LoadLibraryA(path.data());
     if (!m_hModule)
     {
@@ -18,8 +19,8 @@ int LibraryLoader::Unload()
 {
     if (m_hModule)
     {
-        LOG("LibraryLoader::Unload\n");
-
+        LOG_DEBUG("LibraryLoader::Unload\n");
+        // TODO: Add Linux support
         auto result = FreeLibrary(m_hModule);
 
         if (!result) { return 0; }
@@ -31,7 +32,8 @@ int LibraryLoader::Unload()
 template <typename T>
 T LibraryLoader::GetSymbol(std::string_view symbol)
 {
-    LOG("LibraryLoader::GetSymbol %s\n", symbol.data());
+    LOG_DEBUG("LibraryLoader::GetSymbol %s\n", symbol.data());
+    // TODO: Add Linux support
     auto result = (T) GetProcAddress(m_hModule, symbol.data());
     if (!result) { return {}; }
     return result;
